@@ -1,8 +1,28 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<h1>Projects Template</h1>
+    <h1>Projects Template</h1>
 
-<p>This is the projects templates</p>
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for project in projects %}
+            <tr>
+                <td><a href="{% url 'project' project.id %}">{{ project.title }}</a></td>
+                <td>{{ project.description }}</td>
+                <td><a href="{% url 'update-project' project.id %}">Edit</a></td>
+                <td><a href="{% url 'delete-project' project.id %}">Delete</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock content %}
