@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Dev Search</title>
+    <link rel="stylesheet", type="text/css", media="screen", href="{% static 'styles/main.css' %}">
 </head>
 <body>
-<h1>This is the main template</h1>
     {% include 'navbar.html' %}
 
     {% block content %}

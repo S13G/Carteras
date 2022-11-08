@@ -8,7 +8,7 @@ from django.db import models
 class Project(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
-    # featured_image =
+    featured_image = models.ImageField(null=True, blank=True, default="default.jpg")
     demo_link = models.CharField(max_length=1000, null=True, blank=True)
     source_link = models.CharField(max_length=1000, null=True, blank=True)
     vote_total = models.IntegerField(default=0)
