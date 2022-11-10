@@ -27,6 +27,7 @@ def loginUser(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            messages.success(request, "You have successfully logged in")
             return redirect('profiles')
         else:
             messages.error(request, "Username or password is incorrect")
@@ -50,8 +51,9 @@ def registerUser(request):
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
-            messages.success(request, "User account was created")
+            messages.success(request, "Account was successfully created")
             login(request, user)
+            messages.success(request, "You have successfully logged in")
             return redirect('profiles')
         else:
             messages.error(request, "An error has occurred during registration")
