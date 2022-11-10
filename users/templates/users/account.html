@@ -8,7 +8,7 @@
         <div class="column column--1of3">
           <div class="card text-center">
             <div class="card__body dev">
-              <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
+              <a class="tag tag--pill tag--main settings__btn" href="#"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
               <img class="avatar avatar--xl dev__avatar" src="{{ profile.profile_image.url }}" />
               <h2 class="dev__name">{{ profile.name }}</h2>
               <p class="dev__title">{{ profile.short_intro }}</p>
@@ -16,25 +16,25 @@
               <ul class="dev__social">
                 {% if profile.social_github %}
                       <li>
-                          <a title="Github" href="{{ profile.social_github }}" target="_blank"><i class="im im-github"></i></a>
+                          <a title="Github" href="{{ profile.social_github }}" target="_blank"><i class="fab fa-github"></i></a>
                       </li>
                   {% endif %}
 
                   {% if profile.social_twitter %}
                       <li>
-                          <a title="Twitter" href="{{ profile.social_twitter }}" target="_blank"><i class="im im-twitter"></i></a>
+                          <a title="Twitter" href="{{ profile.social_twitter }}" target="_blank"><i class="fab fa-twitter"></i></a>
                       </li>
                   {% endif %}
 
                   {% if profile.social_linkedin %}
                       <li>
-                          <a title="LinkedIn" href="{{ profile.social_linkedin }}" target="_blank"><i class="im im-linkedin"></i></a>
+                          <a title="LinkedIn" href="{{ profile.social_linkedin }}" target="_blank"><i class="fab fa-linkedin"></i></a>
                       </li>
                   {% endif %}
 
                   {% if profile.social_website %}
                       <li>
-                          <a title="Personal Website" href="{{ profile.social_website }}" target="_blank"><i class="im im-globe"></i></a>
+                          <a title="Personal Website" href="{{ profile.social_website }}" target="_blank"><i class="fas fa-globe"></i></a>
                       </li>
                   {% endif %}
 
@@ -51,7 +51,7 @@
           </div>
           <div class="settings">
             <h3 class="settings__title">Skills</h3>
-            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="#"><i class="im im-plus"></i> Add Skill</a>
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="#"><i class="fas fa-plus"></i> Add Skill</a>
           </div>
 
           <table class="settings__table">
@@ -62,9 +62,8 @@
                         <p>{{ skill.description|slice:"200" }}</p>
                       </td>
                       <td class="settings__tableActions">
-                        <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
-                        <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
-                          Delete</a>
+                        <a class="tag tag--pill tag--main settings__btn" href="#"><i class="fa-regular fa-pen-to-square"></i>Edit</a>
+                        <a class="tag tag--pill tag--main settings__btn" href="#"><i class="fas fa-trash"></i>Delete</a>
                       </td>
                     </tr>
               {% endfor %}
@@ -72,7 +71,7 @@
 
           <div class="settings">
             <h3 class="settings__title">Projects</h3>
-            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="#"><i class="im im-plus"></i> Add Project</a>
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="#"><i class="fas fa-plus"></i> Add Project</a>
           </div>
 
           <table class="settings__table">
@@ -86,8 +85,8 @@
                         <p>{{ project.description|slice:"160" }}</p>
                       </td>
                       <td class="settings__tableActions">
-                        <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
-                        <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
+                        <a class="tag tag--pill tag--main settings__btn" href="#"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                        <a class="tag tag--pill tag--main settings__btn" href="#"><i class="fas fa-trash"></i>
                           Delete</a>
                       </td>
                     </tr>
