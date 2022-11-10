@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from users.forms import CustomUserCreationForm
+from users.forms import CustomUserCreationForm, ProfileForm
 from django.shortcuts import render, redirect
 
 from users.models import Profile
@@ -83,3 +83,11 @@ def userAccount(request):
     projects = profile.project_set.all()
     context = {"profile": profile, "skills": skills, "projects": projects}
     return render(request, 'users/account.html', context)
+
+
+@login_required(login_url="login")
+def editAccount(request):
+    form = ProfileForm()
+
+    context = {"form": form}
+    return render(request, 'users/profile-form.html', context)
