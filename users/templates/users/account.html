@@ -8,7 +8,7 @@
         <div class="column column--1of3">
           <div class="card text-center">
             <div class="card__body dev">
-              <a class="tag tag--pill tag--main settings__btn" href="#"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+              <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-account' %}"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
               <img class="avatar avatar--xl dev__avatar" src="{{ profile.profile_image.url }}" />
               <h2 class="dev__name">{{ profile.name }}</h2>
               <p class="dev__title">{{ profile.short_intro }}</p>
@@ -71,7 +71,7 @@
 
           <div class="settings">
             <h3 class="settings__title">Projects</h3>
-            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="#"><i class="fas fa-plus"></i> Add Project</a>
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'create-project' %}"><i class="fas fa-plus"></i> Add Project</a>
           </div>
 
           <table class="settings__table">
@@ -85,8 +85,8 @@
                         <p>{{ project.description|slice:"160" }}</p>
                       </td>
                       <td class="settings__tableActions">
-                        <a class="tag tag--pill tag--main settings__btn" href="#"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
-                        <a class="tag tag--pill tag--main settings__btn" href="#"><i class="fas fa-trash"></i>
+                        <a class="tag tag--pill tag--main settings__btn" href="{% url 'update-project' project.id %}"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                        <a class="tag tag--pill tag--main settings__btn" href="{% url 'delete-project' project.id %}"><i class="fas fa-trash"></i>
                           Delete</a>
                       </td>
                     </tr>
