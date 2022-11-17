@@ -6,7 +6,7 @@ from projects.forms import ProjectForm
 from projects.models import Project
 
 
-# Create your views here.
+# Create your views here
 
 
 def projects(request):
