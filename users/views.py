@@ -136,6 +136,7 @@ def updateSkill(request, pk):
     return render(request, 'users/skill-form.html', context)
 
 
+# deleting of users skills
 @login_required(login_url="login")
 def deleteSkill(request, pk):
     profile = request.user.profile
