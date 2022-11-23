@@ -85,6 +85,7 @@ def userAccount(request):
     return render(request, 'users/account.html', context)
 
 
+# Editing of skills
 @login_required(login_url="login")
 def editAccount(request):
     profile = request.user.profile
@@ -101,6 +102,7 @@ def editAccount(request):
     return render(request, 'users/profile-form.html', context)
 
 
+# Create Skill
 @login_required(login_url='login')
 def createSkill(request):
     profile = request.user.profile
@@ -119,6 +121,7 @@ def createSkill(request):
     return render(request, 'users/skill-form.html', context)
 
 
+# Update skills
 @login_required(login_url='login')
 def updateSkill(request, pk):
     profile = request.user.profile
