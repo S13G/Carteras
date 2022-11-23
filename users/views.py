@@ -2,10 +2,11 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.shortcuts import render, redirect
 
 from users.forms import CustomUserCreationForm, ProfileForm, SkillForm
-from users.models import Profile
+from users.models import Profile, Skill
 
 
 # Create your views here.
@@ -63,8 +64,14 @@ def registerUser(request):
 
 
 def profiles(request):
-    profiles = Profile.objects.all()
-    context = {"profiles": profiles}
+    search_query = ""
+    if request.GET.get('search_query'):
+        search_query = request.GET.get('search_query')
+
+    skills = Skill.objects.filter(name__iexact=search_query)
+    profiles = Profile.objects.distinct().filter(
+        Q(name__icontains=search_query) | Q(short_intro__icontains=search_query) | Q(skill__in=skills))
+    context = {"profiles": profiles, "search_query": search_query}
     return render(request, 'users/profiles.html', context)
 
 
