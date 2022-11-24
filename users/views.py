@@ -2,11 +2,11 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.db.models import Q
 from django.shortcuts import render, redirect
 
 from users.forms import CustomUserCreationForm, ProfileForm, SkillForm
-from users.models import Profile, Skill
+from users.models import Profile
+from users.utils import searchProfiles
 
 
 # Create your views here.
@@ -65,14 +65,7 @@ def registerUser(request):
 
 # get profiles
 def profiles(request):
-    search_query = ""
-    if request.GET.get('search_query'):
-        search_query = request.GET.get('search_query')
-
-    skills = Skill.objects.filter(name__iexact=search_query)
-    # used distinct() to make sure the profiles were not being duplicated because of the skills search
-    profiles = Profile.objects.distinct().filter(
-        Q(name__icontains=search_query) | Q(short_intro__icontains=search_query) | Q(skill__in=skills))
+    profiles, search_query = searchProfiles(request)
     context = {"profiles": profiles, "search_query": search_query}
     return render(request, 'users/profiles.html', context)
 
