@@ -69,6 +69,7 @@ def profiles(request):
         search_query = request.GET.get('search_query')
 
     skills = Skill.objects.filter(name__iexact=search_query)
+    # used distinct() to make sure the profiles were not being duplicated because of the skills search
     profiles = Profile.objects.distinct().filter(
         Q(name__icontains=search_query) | Q(short_intro__icontains=search_query) | Q(skill__in=skills))
     context = {"profiles": profiles, "search_query": search_query}
