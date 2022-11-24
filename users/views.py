@@ -63,6 +63,7 @@ def registerUser(request):
     return render(request, 'users/login-register.html', context)
 
 
+# get profiles
 def profiles(request):
     search_query = ""
     if request.GET.get('search_query'):
