@@ -30,6 +30,7 @@ def project(request, pk):
     return render(request, 'projects/single-project.html', context)
 
 
+# create projects
 @login_required(login_url="login")
 def createProject(request):
     profile = request.user.profile
