@@ -1,26 +1,34 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect
 
 from projects.forms import ProjectForm
-from projects.models import Project, Tag
+from projects.models import Project
+from projects.utils import searchProjects
 
 
 # Create your views here
 
 
 def projects(request):
-    search_query = ""
-    if request.GET.get('search_query'):
-        search_query = request.GET.get('search_query')
+    projects, search_query = searchProjects(request)
 
-    tags = Tag.objects.filter(name__icontains=search_query)
+    # pagination
+    page = request.GET.get("page")
+    results = 3
+    paginator = Paginator(projects, results)
 
-    projects = Project.objects.distinct().filter(
-        Q(title__icontains=search_query) | Q(description__icontains=search_query) |
-        Q(owner__name__icontains=search_query) | Q(tags__in=tags))
-    context = {"projects": projects, "search_query": search_query}
+    try:
+        projects = paginator.page(page)
+    except PageNotAnInteger:
+        page = 1
+        projects = paginator.page(page)
+    except EmptyPage:
+        page = paginator.num_pages
+        projects = paginator.page(page)
+
+    context = {"projects": projects, "search_query": search_query, "paginator": paginator}
     return render(request, 'projects/projects.html', context)
 
 
