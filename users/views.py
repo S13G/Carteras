@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 
 from users.forms import CustomUserCreationForm, ProfileForm, SkillForm
 from users.models import Profile
-from users.utils import searchProfiles
+from users.utils import searchProfiles, paginateProfiles
 
 
 # Create your views here.
@@ -66,7 +66,8 @@ def registerUser(request):
 # get profiles
 def profiles(request):
     profiles, search_query = searchProfiles(request)
-    context = {"profiles": profiles, "search_query": search_query}
+    custom_range, profiles = paginateProfiles(request, profiles, 3)
+    context = {"profiles": profiles, "search_query": search_query, "custom_range": custom_range}
     return render(request, 'users/profiles.html', context)
 
 
