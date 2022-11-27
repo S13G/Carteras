@@ -4,6 +4,7 @@ from django.db.models import Q
 from projects.models import Project, Tag
 
 
+# function for paginating projects
 def paginateProjects(request, projects, results):
     page = request.GET.get("page")
     paginator = Paginator(projects, results)
@@ -17,6 +18,7 @@ def paginateProjects(request, projects, results):
         page = paginator.num_pages
         projects = paginator.page(page)
 
+    # determines how many pagination numbers will be displayed
     left_index = (int(page) - 4)
     right_index = (int(page) + 5)
 
@@ -30,6 +32,7 @@ def paginateProjects(request, projects, results):
     return custom_range, projects
 
 
+# projects displayed generally and also filtered with search query
 def searchProjects(request):
     search_query = ""
     if request.GET.get('search_query'):
