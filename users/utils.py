@@ -4,6 +4,7 @@ from django.db.models import Q
 from users.models import Profile, Skill
 
 
+# paginating profiles
 def paginateProfiles(request, profiles, results):
     page = request.GET.get("page")
     paginator = Paginator(profiles, results)
@@ -30,6 +31,7 @@ def paginateProfiles(request, profiles, results):
     return custom_range, profiles
 
 
+# function for passing profiles and filtering by search query
 def searchProfiles(request):
     search_query = ""
     if request.GET.get('search_query'):

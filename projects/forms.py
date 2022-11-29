@@ -7,6 +7,7 @@ from projects.models import Project
 # Create your forms below
 
 
+# form for the project
 class ProjectForm(ModelForm):
     class Meta:
         model = Project

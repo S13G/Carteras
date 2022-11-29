@@ -5,6 +5,7 @@ from django.forms import ModelForm
 from users.models import Profile, Skill
 
 
+# Registration form
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
@@ -21,6 +22,7 @@ class CustomUserCreationForm(UserCreationForm):
             field.widget.attrs.update({'class': 'input'})
 
 
+# profile form
 class ProfileForm(ModelForm):
     class Meta:
         model = Profile
@@ -34,6 +36,7 @@ class ProfileForm(ModelForm):
             field.widget.attrs.update({'class': 'input'})
 
 
+# skill form
 class SkillForm(ModelForm):
     class Meta:
         model = Skill

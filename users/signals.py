@@ -4,6 +4,7 @@ from django.dispatch import receiver
 from users.models import User, Profile
 
 
+# Create profile automatically for newly registered user
 @receiver(post_save, sender=User)
 def createProfile(sender, instance, created, **kwargs):
     if created:
@@ -16,6 +17,7 @@ def createProfile(sender, instance, created, **kwargs):
         )
 
 
+# update user information if profile is updated
 @receiver(post_save, sender=Profile)
 def updateUser(sender, instance, created, **kwargs):
     profile = instance
@@ -27,6 +29,7 @@ def updateUser(sender, instance, created, **kwargs):
         user.save()
 
 
+# delete user account if profile is deleted
 @receiver(post_delete, sender=Profile)
 def deleteUser(sender, instance, **kwargs):
     user = instance.user

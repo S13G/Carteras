@@ -12,6 +12,7 @@ from users.utils import searchProfiles, paginateProfiles
 # Create your views here.
 
 
+# login user
 def loginUser(request):
     page = 'login'
     if request.user.is_authenticated:
@@ -37,12 +38,14 @@ def loginUser(request):
     return render(request, 'users/login-register.html', context)
 
 
+# logging out user
 def logoutUser(request):
     logout(request)
     messages.info(request, "User was logged out")
     return redirect('login')
 
 
+# view for registering user
 def registerUser(request):
     page = 'register'
     form = CustomUserCreationForm()
@@ -63,7 +66,7 @@ def registerUser(request):
     return render(request, 'users/login-register.html', context)
 
 
-# get profiles
+# get all profiles
 def profiles(request):
     profiles, search_query = searchProfiles(request)
     custom_range, profiles = paginateProfiles(request, profiles, 6)
@@ -71,6 +74,7 @@ def profiles(request):
     return render(request, 'users/profiles.html', context)
 
 
+# get specific user profile in list of profiles plus other info relating to the user
 def userProfile(request, pk):
     profile = Profile.objects.get(id=pk)
     topSkills = profile.skill_set.exclude(description__exact="")
@@ -79,6 +83,7 @@ def userProfile(request, pk):
     return render(request, 'users/user-profile.html', context)
 
 
+# user profile account, only accessible to logged in users
 @login_required(login_url='login')
 def userAccount(request):
     profile = request.user.profile

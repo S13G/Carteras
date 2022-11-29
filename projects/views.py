@@ -14,7 +14,7 @@ def projects(request):
     projects, search_query = searchProjects(request)
 
     # pagination
-    custom_range, projects = paginateProjects(request, projects, 2)
+    custom_range, projects = paginateProjects(request, projects, 6)
 
     context = {"projects": projects, "search_query": search_query, "custom_range": custom_range}
     return render(request, 'projects/projects.html', context)
