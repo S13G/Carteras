@@ -17,7 +17,7 @@ def createProfile(sender, instance, created, **kwargs):
         )
 
 
-# update user information if profile is updated
+# function to update user information if profile is updated
 @receiver(post_save, sender=Profile)
 def updateUser(sender, instance, created, **kwargs):
     profile = instance
