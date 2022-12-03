@@ -18,6 +18,7 @@ def paginateProfiles(request, profiles, results):
         page = paginator.num_pages
         profiles = paginator.page(page)
 
+    # indicating how many pagination buttons will show
     left_index = (int(page) - 4)
     right_index = (int(page) + 5)
 
