@@ -24,22 +24,41 @@ class Project(models.Model):
         return self.title
 
     class Meta:
-        ordering = ["-created"]
+        ordering = ["-vote_ratio", "-vote_total", "title"]
+
+    @property
+    def reviewers(self):
+        queryset = self.reviews.all().values_list("owner__id", flat=True)
+        return queryset
+
+    @property
+    def get_vote_count(self):
+        reviews = self.reviews.all()
+        up_votes = reviews.filter(value="up").count()
+        total_votes = reviews.count()
+
+        ratio = (up_votes / total_votes) * 100
+        self.vote_total = total_votes
+        self.vote_ratio = ratio
+        self.save()
 
 
 class Review(models.Model):
     VOTE_TYPE = (
-        ('up', 'up'),
-        ('down', 'down')
+        ('up', 'Up Vote'),
+        ('down', 'Down Vote')
     )
 
-    # owner
+    owner = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, blank=True, related_name="reviews")
     body = models.TextField(null=True, blank=True)
     value = models.CharField(max_length=50, choices=VOTE_TYPE)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+
+    class Meta:
+        unique_together = [['owner', 'project']]
 
     def __str__(self):
         return self.value

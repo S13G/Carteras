@@ -19,7 +19,7 @@ def loginUser(request):
         return redirect('profiles')
 
     if request.method == "POST":
-        username = request.POST["username"]
+        username = request.POST["username"].lower()
         password = request.POST["password"]
 
         try:
@@ -31,7 +31,7 @@ def loginUser(request):
         if user is not None:
             login(request, user)
             messages.success(request, "You have successfully logged in")
-            return redirect('profiles')
+            return redirect(request.GET['next'] if 'next' in request.GET else 'account')
         else:
             messages.error(request, "Username or password is incorrect")
     context = {"page": page}
