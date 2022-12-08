@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core.mail import EmailMessage
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
@@ -15,6 +17,20 @@ def createProfile(sender, instance, created, **kwargs):
             email=user.email,
             name=user.first_name,
         )
+
+        subject = "Welcome to Carteras"
+        body = "You have signed up to Carteras, we are glad you are here. Upload your skills, your projects and " \
+               "make sure you connect with other developers. Happy coding "
+
+        email = EmailMessage(
+            subject=subject,
+            body=body,
+            from_email=settings.EMAIL_HOST_USER,
+            to=[profile.email],
+            reply_to=None,
+            headers={'Content-Type': 'text/plain'},
+        )
+        email.send()
 
 
 # function to update user information if profile is updated
