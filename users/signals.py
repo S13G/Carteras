@@ -30,7 +30,7 @@ def createProfile(sender, instance, created, **kwargs):
             reply_to=None,
             headers={'Content-Type': 'text/plain'},
         )
-        email.send()
+        email.send(fail_silently=False)
 
 
 # function to update user information if profile is updated
