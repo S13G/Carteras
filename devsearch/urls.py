@@ -21,7 +21,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # the projects url
     path('projects/', include('projects.urls')),
+    # the users account urls
     path('', include('users.urls')),
     # password reset urls and views plus templates
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="reset_password.html"),
