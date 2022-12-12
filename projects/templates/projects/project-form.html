@@ -5,7 +5,7 @@
     <main class="formPage my-xl">
         <div class="content-box">
             <div class="formWrapper">
-                <a class="backButton" href="#"><i class="fas fa-backward"></i></a>
+                <a class="backButton" href="{% url 'account' %}"><i class="fas fa-backward"></i></a>
                 <br>
 
                 <form class="form" method="POST" enctype="multipart/form-data">
@@ -18,6 +18,11 @@
                             {{ field }}
                         </div>
                     {% endfor %}
+                    <div class="form__field">
+                        <label for="formInput#text">Tags</label>
+                        <small>Create a space between each word..e.g. (CSS JAVA HTML JS).....</small>
+                        <textarea class="input" placeholder="Add tags here...." name="newtags"></textarea>
+                    </div>
 
                     <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
                 </form>
