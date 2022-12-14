@@ -18,7 +18,7 @@
                             {{ field }}
                         </div>
                     {% endfor %}
-
+{#                    form#}
                     <div class="form__field">
                         {% for tag in project.tags.all %}
                             <div class="project-tag tag tag--pill tag--main" data-tag="{{ tag.id }}" data-project="{{ project.id }}">{{ tag.name }} &#215;</div>
