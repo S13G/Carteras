@@ -44,3 +44,13 @@ img {
 .vote--option:hover {
     color: black;
 }
+
+#form-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 2em;
+    border: 1px solid #eaeaeb;
+    background-color: white;
+    border-radius: 5px;
+    padding: 2em;
+}
